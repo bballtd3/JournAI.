@@ -1,0 +1,30 @@
+// Google Sign-In Callback
+function onSignIn(googleUser) {
+    // Get the user's profile info
+    const profile = googleUser.getBasicProfile();
+    console.log('Signed in as: ' + profile.getName());
+    
+    // Hide Google Sign-In and show the chatbox
+    document.getElementById('google-sign-in').style.display = 'none';
+    document.getElementById('chatbox').classList.remove('hidden');
+}
+
+// Send message to chatbox
+function sendMessage() {
+    const userMessage = document.getElementById('user-input').value;
+    if (userMessage.trim() === '') return;
+
+    const messageContainer = document.getElementById('messages');
+    const userMessageElement = document.createElement('div');
+    userMessageElement.textContent = 'You: ' + userMessage;
+    messageContainer.appendChild(userMessageElement);
+
+    // Simple AI response (You can integrate GPT API here)
+    const aiMessageElement = document.createElement('div');
+    aiMessageElement.textContent = 'JournAI: Let’s reflect on that! What else is on your mind?';
+    messageContainer.appendChild(aiMessageElement);
+
+    // Clear user input
+    document.getElementById('user-input').value = '';
+    messageContainer.scrollTop = messageContainer.scrollHeight; // Scroll to bottom
+}
